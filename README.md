@@ -197,7 +197,7 @@ The choice of data provider is entirely up to you and depends on your specific n
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-repo/reppo-solver-node.git
+   git clone https://github.com/Reppo-Labs/solver-node
    cd reppo-solver-node
    ```
 
