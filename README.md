@@ -73,7 +73,7 @@ The Data-Broker Node consists of the following key components, each implemented 
      - Routes to appropriate Data-Broker components
    - **Dependencies**: `web3.py`, `python-dotenv`
 
-2. **DataData-Broker (`dataData-Broker/`)**
+2. **DataSolver (`DataSolver/`)**
    - **Purpose**: MCP-compliant data generation and querying
    - **Functionality**: 
      - **MCP Provider**: Primary provider for production
@@ -126,7 +126,7 @@ The Data-Broker Node consists of the following key components, each implemented 
    - Mock: Generates synthetic data
 
 3. **Dataset Generation**:
-   - The `DataData-Broker` uses the configured data provider to generate a dataset matching the RFD schema.
+   - The `DataSolver` uses the configured data provider to generate a dataset matching the RFD schema.
    - Supported providers include HuggingFace, Mock, OpenGradient, MCP, and LocalLLM.
    - The dataset is saved locally as `data/rfd_<rfd_id>_solution.json`.
 
