@@ -1,11 +1,11 @@
-# Reppo Solver Node 🌟
+# Reppo Data-Broker Node 🌟
                    
 
-![Reppo Solver Node](https://img.shields.io/badge/Version-0.1.0-blue.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Reppo Data-Broker Node](https://img.shields.io/badge/Version-0.1.0-blue.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-The **Reppo Solver Node** is a decentralized application designed to participate in the **Reppo.Exchange**, a blockchain-based data marketplace that facilitates the creation, validation, and exchange of high-quality datasets. The Solver Node listens for Requests for Data (RFDs), generates or sources the requested datasets, uploads them to IPFS, verifies NFT ownership for access control, and submits solutions to the Reppo Exchange smart contract.
+The **Reppo Data-Broker Node** is a decentralized application designed to participate in the **Reppo.Exchange**, a blockchain-based data marketplace that facilitates the creation, validation, and exchange of high-quality datasets. The Data-Broker Node listens for Requests for Data (RFDs), generates or sources the requested datasets, uploads them to IPFS, verifies NFT ownership for access control, and submits solutions to the Reppo Exchange smart contract.
 
-This README provides an overview of the Reppo Solver Node, its architecture, setup instructions, and usage guidelines.
+This README provides an overview of the Reppo Data-Broker Node, its architecture, setup instructions, and usage guidelines.
 
 ---
 
@@ -31,20 +31,20 @@ This README provides an overview of the Reppo Solver Node, its architecture, set
 ## Overview ✨
 
 Reppo.Exchange enables:
-- **Intent-Based Data Access**: AI agents broadcast Requests for Data (RFDs) that solver nodes fulfill
-- **Decentralized MCP Network**: Distributed network of solver nodes providing MCP-compliant data services
-- **Permissionless Participation**: Join the network by staking a Reppo Solver NFT
+- **Intent-Based Data Access**: AI agents broadcast Requests for Data (RFDs) that Data-Broker nodes fulfill
+- **Decentralized MCP Network**: Distributed network of Data-Broker nodes providing MCP-compliant data services
+- **Permissionless Participation**: Join the network by staking a Reppo Data-Broker NFT
 - **Token Incentives**: Earn $REPPO tokens for fulfilling RFDs
 - **Standardized Integration**: MCP protocol ensures consistent data access across the network
 
-The Solver Node performs these key functions:
+The Data-Broker Node performs these key functions:
 1. **RFD Processing**: Listens for and processes Requests for Data on the blockchain
 2. **MCP Integration**: Connects to MCP servers to fulfill data requests
 3. **Data Generation/Querying**: Uses MCP tools (like DynamoDB) to generate or query data
-4. **NFT Verification**: Ensures node operator owns a Reppo Solver NFT
+4. **NFT Verification**: Ensures node operator owns a Reppo Data-Broker NFT
 5. **Solution Submission**: Submits verified solutions to the Reppo Exchange
 
-The Reppo Solver Node is a key participant in this ecosystem, performing the following tasks:
+The Reppo Data-Broker Node is a key participant in this ecosystem, performing the following tasks:
 
 1. **Listening for RFDs**: Monitors the Reppo Exchange smart contract for new RFD events.
 2. **Generating Datasets**: Uses a data generation service (e.g., Two Ligma server) to create synthetic or real datasets that meet RFD specifications.
@@ -52,28 +52,28 @@ The Reppo Solver Node is a key participant in this ecosystem, performing the fol
 4. **Verifying NFT Ownership**: Ensures the node operator owns a Reppo Node NFT, which is required to participate in the network.
 5. **Submitting Solutions**: Submits the IPFS URI of the dataset to the Reppo Exchange smart contract for validation and reward distribution.
 
-The Solver Node is designed to be modular, extensible, and easy to integrate with various data sources, such as Vana (Data DAOs), self-hosted LLMs, OpenGradient (synthetic data), or enterprise datasets.
+The Data-Broker Node is designed to be modular, extensible, and easy to integrate with various data sources, such as Vana (Data DAOs), self-hosted LLMs, OpenGradient (synthetic data), or enterprise datasets.
 
 ---
 
 ## Architecture 🏗️
 
-The Reppo Solver Node is built as a Python application with a modular architecture, separating concerns into distinct components. This design ensures maintainability, scalability, and flexibility for integrating with different data sources and blockchain networks.
-The Solver Node implements a modular architecture designed for the decentralized MCP network:
+The Reppo Data-Broker Node is built as a Python application with a modular architecture, separating concerns into distinct components. This design ensures maintainability, scalability, and flexibility for integrating with different data sources and blockchain networks.
+The Data-Broker Node implements a modular architecture designed for the decentralized MCP network:
 
 ### Components
 
-The Solver Node consists of the following key components, each implemented in a dedicated Python module:
+The Data-Broker Node consists of the following key components, each implemented in a dedicated Python module:
 
 1. **RFDListener (`rfdListener.py`)**
    - **Purpose**: Listens for `RFDPosted` events on the Reppo Exchange
    - **Functionality**: 
      - Monitors blockchain for new RFDs
      - Parses RFD intents (data requirements)
-     - Routes to appropriate solver components
+     - Routes to appropriate Data-Broker components
    - **Dependencies**: `web3.py`, `python-dotenv`
 
-2. **DataSolver (`datasolver/`)**
+2. **DataData-Broker (`dataData-Broker/`)**
    - **Purpose**: MCP-compliant data generation and querying
    - **Functionality**: 
      - **MCP Provider**: Primary provider for production
@@ -98,13 +98,13 @@ The Solver Node consists of the following key components, each implemented in a 
    - **Functionality**: Builds, signs, and sends a transaction to the `submitSolution` function of the smart contract, including the RFD ID and IPFS URI. Returns the transaction hash upon success.
    - **Dependencies**: `web3.py`, `python-dotenv`.
 
-6. **SolverNode (`solverNode.py`)**
+6. **Data-BrokerNode (`Data-BrokerNode.py`)**
    - **Purpose**: Orchestrates the entire workflow by integrating all components.
    - **Functionality**: Initializes the other components, coordinates RFD processing, and supports test and mock modes for development. In production mode, it runs the listener and processes RFDs as they arrive.
    - **Dependencies**: All other modules.
 
 7. **Main CLI (`main.py`)**
-   - **Purpose**: Provides a command-line interface (CLI) to start the Solver Node.
+   - **Purpose**: Provides a command-line interface (CLI) to start the Data-Broker Node.
    - **Functionality**: Uses the `click` library to offer options like `--test` (for testing with a sample RFD) and `--mock` (for offline testing without blockchain interactions).
    - **Dependencies**: `click`, `python-dotenv`.
 
@@ -126,7 +126,7 @@ The Solver Node consists of the following key components, each implemented in a 
    - Mock: Generates synthetic data
 
 3. **Dataset Generation**:
-   - The `DataSolver` uses the configured data provider to generate a dataset matching the RFD schema.
+   - The `DataData-Broker` uses the configured data provider to generate a dataset matching the RFD schema.
    - Supported providers include HuggingFace, Mock, OpenGradient, MCP, and LocalLLM.
    - The dataset is saved locally as `data/rfd_<rfd_id>_solution.json`.
 
@@ -140,13 +140,13 @@ The Solver Node consists of the following key components, each implemented in a 
 
 6. **Completion**:
    - If successful, the dataset is available on the Reppo Exchange for validation and reward distribution.
-   - The Solver Node continues listening for new RFDs.
+   - The Data-Broker Node continues listening for new RFDs.
 
 ---
 
 ## Prerequisites ✅
 
-To run the Reppo Solver Node, ensure you have the following:
+To run the Reppo Data-Broker Node, ensure you have the following:
 
 - **Python**: Version 3.8 or higher.
 - **Ethereum Node Access**: A connection to an Ethereum node (e.g., Infura, Alchemy) via an RPC URL.
@@ -157,7 +157,7 @@ To run the Reppo Solver Node, ensure you have the following:
 
 ### Optional Data Providers 🔄
 
-The Solver Node is designed to be flexible in how it generates or sources datasets. You can:
+The Data-Broker Node is designed to be flexible in how it generates or sources datasets. You can:
 
 1. **Use Built-in Providers** (optional):
    - **[HuggingFace](https://huggingface.co/)**: Use HuggingFace models for dataset generation
@@ -189,7 +189,7 @@ The Solver Node is designed to be flexible in how it generates or sources datase
    - Integrate with data marketplaces
    - Use cloud-based data generation services
 
-The choice of data provider is entirely up to you and depends on your specific needs. The Solver Node's modular architecture makes it easy to integrate with any data source while maintaining the core functionality of RFD processing and blockchain interaction.
+The choice of data provider is entirely up to you and depends on your specific needs. The Data-Broker Node's modular architecture makes it easy to integrate with any data source while maintaining the core functionality of RFD processing and blockchain interaction.
 
 ---
 
@@ -197,8 +197,8 @@ The choice of data provider is entirely up to you and depends on your specific n
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-repo/reppo-solver-node.git
-   cd reppo-solver-node
+   git clone https://github.com/your-repo/reppo-Data-Broker-node.git
+   cd reppo-Data-Broker-node
    ```
 
 2. **Set Up a Virtual Environment** (recommended):
@@ -224,7 +224,7 @@ The choice of data provider is entirely up to you and depends on your specific n
 
 ## Configuration ⚙️
 
-The Solver Node relies on environment variables defined in a `.env` file. Below is an example `.env` file:
+The Data-Broker Node relies on environment variables defined in a `.env` file. Below is an example `.env` file:
 
 ```env
 # Ethereum configuration
@@ -255,7 +255,7 @@ PINATA_SECRET_API_KEY=your-pinata-secret-api-key
 
 ## Usage 🖥️
 
-The Solver Node supports three distinct modes of operation, each designed for different use cases:
+The Data-Broker Node supports three distinct modes of operation, each designed for different use cases:
 
 ### 1. Production Mode (Default)
 ```bash
@@ -347,7 +347,7 @@ Required variables vary by mode:
 
 ## Example RFD 📊
 
-Below is an example RFD for synthetic weather data, which the Solver Node can process:
+Below is an example RFD for synthetic weather data, which the Data-Broker Node can process:
 
 ```json
 {
@@ -379,7 +379,7 @@ Below is an example RFD for synthetic weather data, which the Solver Node can pr
 }
 ```
 
-When processed, the Solver Node:
+When processed, the Data-Broker Node:
 - Generates a dataset matching the schema (e.g., daily weather data for May–August).
 - Saves it as `data/rfd_sf_weather_may_aug_001_solution.json`.
 - Uploads it to IPFS, obtaining an `ipfs://<CID>` URI.
@@ -389,7 +389,7 @@ When processed, the Solver Node:
 
 ## Dependencies 📦
 
-The Reppo Solver Node relies on the following Python packages, listed in `requirements.txt`:
+The Reppo Data-Broker Node relies on the following Python packages, listed in `requirements.txt`:
 
 ```text
 # Blockchain interactions
@@ -424,11 +424,11 @@ pip install -r requirements.txt
 
 ## Contributing 🤝
 
-We welcome contributions to improve the Reppo Solver Node! To contribute:
+We welcome contributions to improve the Reppo Data-Broker Node! To contribute:
 
 1. **Fork the Repository**:
    ```bash
-   git clone https://github.com/your-repo/reppo-solver-node.git
+   git clone https://github.com/your-repo/reppo-Data-Broker-node.git
    ```
 
 2. **Create a Feature Branch**:
@@ -460,4 +460,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-This README provides a comprehensive guide to understanding, setting up, and running the Reppo Solver Node. For further questions, please open an issue on the GitHub repository or contact the maintainers.
+This README provides a comprehensive guide to understanding, setting up, and running the Reppo Data-Broker Node. For further questions, please open an issue on the GitHub repository or contact the maintainers.
